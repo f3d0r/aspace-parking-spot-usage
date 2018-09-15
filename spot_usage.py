@@ -28,7 +28,6 @@ print("Number of curb rules loaded in: ", len(data["features"]))
 
 # Order data by curb_id.
 counter = []
-
 old_curb_id = data["features"][0]["properties"]["metadata"]["curb_id"]
 for i in range(len(data["features"])):
     if data["features"][i]["properties"]["metadata"]["curb_id"]!=old_curb_id:
@@ -36,6 +35,18 @@ for i in range(len(data["features"])):
     old_curb_id = data["features"][i]["properties"]["metadata"]["curb_id"]
 counter.append(len(data["features"]))
 data = [data["features"][counter[i]:counter[i+1]] for i in range(len(counter)-1)]
+
+print("Number of distinct curbs found: ", len(data))
+
+curb_lengths = []
+for i in data:
+    allowed_parking_length = 0
+    # Find allowed parking spots only:
+    for j in i:
+        if 'park' in j["properties"]["rules"][0]["permitted"] and j["properties"]["rules"][0]["vehicle_type"]=='all':
+            allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"] - j["properties"]["metadata"]["distance_start_meters"]
+    curb_lengths.append(allowed_parking_length)
+quit()
 
 PT = []
 with open('ParkingTransaction.csv', newline='') as f:
@@ -90,13 +101,12 @@ print("Number of parking meters not matched to a coordinate: ", len(a))
 # Get midpoints of curbs from coord's curb rules.
 avg_curb_coords = []
 for i in data:
-    if i[0]["geometry"]["coordinates"][0][0]==i[-1]["geometry"]["coordinates"][0][0]:
+    """ if i[0]["geometry"]["coordinates"][0][0]==i[-1]["geometry"]["coordinates"][0][0]:
         avg_curb_coords.append([i[0]["geometry"]["coordinates"][0][0]/2 + i[0]["geometry"]["coordinates"][1][0]/2,
-                                i[0]["geometry"]["coordinates"][0][1]/2 + i[-1]["geometry"]["coordinates"][1][1]/2])
-        break
+                                i[0]["geometry"]["coordinates"][0][1]/2 + i[0]["geometry"]["coordinates"][1][1]/2])
+        break """
     avg_curb_coords.append([i[0]["geometry"]["coordinates"][0][0]/2 + i[-1]["geometry"]["coordinates"][0][0]/2,
                             i[0]["geometry"]["coordinates"][0][1]/2 + i[-1]["geometry"]["coordinates"][0][1]/2])
-distances = [[] for i in meter_lng_lats]
 
 # Approximate radius of earth in meters
 R = 6373000.0
@@ -106,10 +116,13 @@ def crowDistance(lon1, lat1, lon2, lat2):
     lon1 = radians(lon1)
     lat2 = radians(lat2)
     lon2 = radians(lon2)
+
     dlon = lon2 - lon1
     dlat = lat2 - lat1
+
     a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
     distance = R * c
     return distance
 # testing:
@@ -126,6 +139,8 @@ c2 = toXY([-122.32610904893714, 47.6099834899322])
 print(sqrt((c1[0]-c2[0])**2 + (c1[1]-c2[1])**2))
 quit() """
 
+# POSSIBLE NEW IDEA: INSTEAD OF toXY, USE crowDistance TO CONVERT
+# TO A PLANAR GRID ON WHICH manhattanDistance IS COMPUTED
 def manhattanDistance(curb_start, curb_end, meter_position):
     diff1 = curb_end[1]-curb_start[1]
     diff2 = curb_end[0]-curb_start[0]
@@ -135,6 +150,7 @@ def manhattanDistance(curb_start, curb_end, meter_position):
     ) / sqrt(diff1**2 + diff2**2)
     return distance
 
+distances = [[] for i in meter_lng_lats]
 for i in range(len(meter_lng_lats)):
     for j in avg_curb_coords:
         # L2 norm on lat/lng coordinates method
@@ -150,13 +166,26 @@ for i in range(len(meter_lng_lats)):
                 toXY(j[0]["geometry"]["coordinates"][1]),
                 toXY([float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
             ))
-            break
+            break IS THIS BREAK CORRECT???
         distances[i].append(manhattanDistance(
                             j[0]["geometry"]["coordinates"][0], j[-1]["geometry"]["coordinates"][0],
                             [float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
                         ) """
 
-meter_indices_by_curb = [i.index(min(i)) if min(i) < 40 else None for i in distances]
+# The following structure is indexed in order of the meter_codes,
+# and thus element i is the index of data with the closest curb_id 
+# to meter `meter_codes[i]`!
+closest_curbs = [i.index(min(i)) if min(i) < 40 else None for i in distances]
+
+# Get denominators for weights (total possible parking time by curb)
+curb_lengths = []
+for i in data:
+    allowed_parking_length = 0
+    # Find allowed parking spots only:
+    for j in i:
+        if 'park' in j["rules"][0]["permitted"] and j["rules"][0]["vehicle_type"]=='all':
+            allowed_parking_length += j["metadata"]["distance_end_meters"] - j["metadata"]["distance_start_meters"]
+    curb_lengths.append(allowed_parking_length)
 
 """ for i in range(len(meter_indices_by_curb)):
     if meter_indices_by_curb[i]!=None:
@@ -166,7 +195,7 @@ meter_indices_by_curb = [i.index(min(i)) if min(i) < 40 else None for i in dista
 quit() """
 """ print(meter_indices_by_curb) """
 #print(distances)
-print("Number of parking meters matched to a curb: ", sum(x is not None for x in meter_indices_by_curb))
+print("Number of parking meters matched to a curb: ", sum(x is not None for x in closest_curbs))
 print(len(meter_codes))
 """ print(len(meter_lng_lats))
 print(len(data))
@@ -175,6 +204,12 @@ print(len(counter)) """
 containers = []
 """ for i in meter_indices_by_curb:
     if i is in containers: """
+
+# Assume there is a 1:1 mapping between curbs and meter codes for now.
+# Compute weights:
+
+
+
 
 # Now we need to sum the parking durations of meters on the same curb 
 # (assuming the parker is allowed to pay at either), and divide that by
