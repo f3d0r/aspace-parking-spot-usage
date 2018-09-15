@@ -1,0 +1,1353 @@
+[
+    [{
+        'geometry': {
+            'coordinates': [
+                [-122.32591192499072, 47.610065944373275],
+                [-122.32596423473412, 47.61004406387254]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTo3ODE0',
+                'distance_end_meters': 4.62,
+                'end_street_name': 'TERRY AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SPRING ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32596423473412, 47.61004406387254],
+                [-122.32610904893714, 47.6099834899322]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTo3ODE0',
+                'distance_end_meters': 17.41,
+                'distance_start_meters': 4.62,
+                'end_street_name': 'TERRY AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SPRING ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 2,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '17:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 3,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '17:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32610904893714, 47.6099834899322],
+                [-122.3263986773432, 47.60986234205151]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTo3ODE0',
+                'distance_end_meters': 42.99,
+                'distance_start_meters': 17.41,
+                'end_street_name': 'TERRY AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SPRING ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection', 'paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.3263986773432, 47.60986234205151],
+                [-122.3265243565968, 47.60980977201727]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTo3ODE0',
+                'distance_end_meters': 54.09,
+                'distance_start_meters': 42.99,
+                'end_street_name': 'TERRY AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SPRING ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 2,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '17:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 3,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '17:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.3265243565968, 47.60980977201727],
+                [-122.32654881310022, 47.60979954217277]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTo3ODE0',
+                'distance_end_meters': 56.25,
+                'distance_start_meters': 54.09,
+                'end_street_name': 'TERRY AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SPRING ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32654881310022, 47.60979954217277],
+                [-122.32672329213608, 47.609726559809936]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTo3ODE0',
+                'distance_end_meters': 71.66,
+                'distance_start_meters': 56.25,
+                'end_street_name': 'TERRY AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SPRING ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 0.05,
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'load_passengers',
+                'reasons': ['sign', 'paint', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 0.05,
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'load_passengers',
+                'reasons': ['sign', 'paint'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32672329213608, 47.609726559809936],
+                [-122.32694483645918, 47.609633890635706]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTo3ODE0',
+                'distance_end_meters': 91.2268092845446,
+                'distance_start_meters': 71.66,
+                'end_street_name': 'TERRY AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SPRING ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }],
+    [{
+        'geometry': {
+            'coordinates': [
+                [-122.3257544915622, 47.61012857028217],
+                [-122.32627806207697, 47.61070109639067],
+                [-122.32631439163588, 47.61074081280586]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxMzYzNg',
+                'distance_end_meters': 80.06723963976738,
+                'end_street_name': 'SENECA ST',
+                'side_of_street': 'NE',
+                'start_street_name': 'SPRING ST',
+                'street_name': 'BOREN AVE',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }],
+    [{
+        'geometry': {
+            'coordinates': [
+                [-122.32631439057407, 47.610740813247105],
+                [-122.32592737085679, 47.61090267586347]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 34.18,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection', 'sign', 'paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32592737085679, 47.61090267586347],
+                [-122.32587256759665, 47.61092559614033]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 39.02,
+                'distance_start_meters': 34.18,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 0.1,
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'load_passengers',
+                'reasons': ['paint', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 0.1,
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'load_passengers',
+                'reasons': ['paint'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32587256759665, 47.61092559614033],
+                [-122.32580483653764, 47.61095392318914]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 45.001730370171394,
+                'distance_start_meters': 39.02,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32580483653764, 47.61095392318914],
+                [-122.32568064295627, 47.611005864465305]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 55.97,
+                'distance_start_meters': 45.001730370171394,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 0.05,
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'load_passengers',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 0.05,
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'load_passengers',
+                'reasons': ['sign'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32568064295627, 47.611005864465305],
+                [-122.32565482654448, 47.611016661620525]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 58.25,
+                'distance_start_meters': 55.97,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32565482654448, 47.611016661620525],
+                [-122.32559356918138, 47.611042281186194]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 63.66,
+                'distance_start_meters': 58.25,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 2,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '17:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 3,
+                'other_vehicles_permitted': [],
+                'permitted': ['park',
+                    'load_goods', 'load_passengers'
+                ],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '17:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32559356918138, 47.611042281186194],
+                [-122.32556458233304, 47.611054404307836]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 66.22,
+                'distance_start_meters': 63.66,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32556458233304, 47.611054404307836],
+                [-122.32550490916178, 47.61107936131958]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 71.49009065134823,
+                'distance_start_meters': 66.22,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 2,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '17:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 3,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '17:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32550490916178, 47.61107936131958],
+                [-122.32539360521979, 47.611125911783176]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 81.32,
+                'distance_start_meters': 71.49009065134823,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection', 'sign', 'paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32539360521979, 47.611125911783176],
+                [-122.32535978301216, 47.61114005718915]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToxNDA2Ng',
+                'distance_end_meters': 84.30703917449831,
+                'distance_start_meters': 81.32,
+                'end_street_name': 'MINOR AVE',
+                'side_of_street': 'SE',
+                'start_street_name': 'BOREN AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }],
+    [{
+        'geometry': {
+            'coordinates': [
+                [-122.32545561446742, 47.61125786285652],
+                [-122.3255039640538, 47.61123764173453]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToyODgwMw',
+                'distance_end_meters': 4.27,
+                'end_street_name': 'BOREN AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'MINOR AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': ['load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.3255039640538, 47.61123764173453],
+                [-122.32561527001027, 47.61119109053333]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToyODgwMw',
+                'distance_end_meters': 14.1,
+                'distance_start_meters': 4.27,
+                'end_street_name': 'BOREN AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'MINOR AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['sign', 'paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32561527001027, 47.61119109053333],
+                [-122.32572487750353, 47.611145249676]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToyODgwMw',
+                'distance_end_meters': 23.78,
+                'distance_start_meters': 14.1,
+                'end_street_name': 'BOREN AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'MINOR AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 2,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '17:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 3,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '17:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32572487750353, 47.611145249676],
+                [-122.32574423998426, 47.611137151755955]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToyODgwMw',
+                'distance_end_meters': 25.49,
+                'distance_start_meters': 23.78,
+                'end_street_name': 'BOREN AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'MINOR AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.32574423998426, 47.611137151755955],
+                [-122.3257942381083, 47.61111624117034]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToyODgwMw',
+                'distance_end_meters': 29.90559081754609,
+                'distance_start_meters': 25.49,
+                'end_street_name': 'BOREN AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'MINOR AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'max_duration_h': 2,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '17:00',
+                    'time_of_day_start': '08:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'max_duration_h': 3,
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 400,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign', 'meter'],
+                'times': [{
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '20:00',
+                    'time_of_day_start': '17:00'
+                }],
+                'vehicle_type': 'all'
+            }, {
+                'other_vehicles_permitted': [],
+                'permitted': ['park', 'load_goods', 'load_passengers'],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'park',
+                'reasons': ['sign'],
+                'times': [{
+                    'days': [0],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '08:00',
+                    'time_of_day_start': '00:00'
+                }, {
+                    'days': [1,
+                        2, 3, 4, 5, 6
+                    ],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '20:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }, {
+        'geometry': {
+            'coordinates': [
+                [-122.3257942381083, 47.61111624117034],
+                [-122.326410210636, 47.61085862457929]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZToyODgwMw',
+                'distance_end_meters': 84.30528459041565,
+                'distance_start_meters': 29.90559081754609,
+                'end_street_name': 'BOREN AVE',
+                'side_of_street': 'NW',
+                'start_street_name': 'MINOR AVE',
+                'street_name': 'SENECA ST',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['intersection', 'sign', 'paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }],
+    [{
+        'geometry': {
+            'coordinates': [
+                [-122.32646756205806, 47.61067352509008],
+                [-122.32643362663782, 47.61063642596241],
+                [-122.32591192605165, 47.61006594393206]
+            ],
+            'type': 'LineString'
+        },
+        'properties': {
+            'metadata': {
+                'curb_id': 'c2VhdHRsZTozNTcxNg',
+                'distance_end_meters': 79.4564366478789,
+                'end_street_name': 'SPRING ST',
+                'side_of_street': 'SW',
+                'start_street_name': 'SENECA ST',
+                'street_name': 'BOREN AVE',
+                'time_zone': 'America/Los_Angeles'
+            },
+            'rules': [{
+                'other_vehicles_permitted': [],
+                'permitted': [],
+                'price': [{
+                    'price_per_hour': {
+                        'amount': 0,
+                        'currency': 'USD'
+                    }
+                }],
+                'primary': 'none',
+                'reasons': ['sign', 'paint', 'curb_cut'],
+                'times': [{
+                    'days': [0, 1, 2, 3, 4, 5, 6],
+                    'time_of_day_end': '24:00',
+                    'time_of_day_start': '00:00'
+                }],
+                'vehicle_type': 'all'
+            }],
+            'temporary_rules': None
+        },
+        'type': 'Feature'
+    }]
+]
