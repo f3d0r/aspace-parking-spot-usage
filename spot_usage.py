@@ -38,16 +38,6 @@ data = [data["features"][counter[i]:counter[i+1]] for i in range(len(counter)-1)
 
 print("Number of distinct curbs found: ", len(data))
 
-curb_lengths = []
-for i in data:
-    allowed_parking_length = 0
-    # Find allowed parking spots only:
-    for j in i:
-        if 'park' in j["properties"]["rules"][0]["permitted"] and j["properties"]["rules"][0]["vehicle_type"]=='all':
-            allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"] - j["properties"]["metadata"]["distance_start_meters"]
-    curb_lengths.append(allowed_parking_length)
-quit()
-
 PT = []
 with open('ParkingTransaction.csv', newline='') as f:
     read = csv.reader(f)
@@ -57,6 +47,9 @@ PT = PT[1:]
 meter_codes = []
 for row in PT[1:]:
     meter_codes.append(row[1])
+
+print("Number of meter codes obtained: ", len(meter_codes))
+
 meter_codes = list(set(meter_codes))
 meter_codes = [int(code) for code in meter_codes]
 meter_codes = sorted(meter_codes)
@@ -178,14 +171,37 @@ for i in range(len(meter_lng_lats)):
 closest_curbs = [i.index(min(i)) if min(i) < 40 else None for i in distances]
 
 # Get denominators for weights (total possible parking time by curb)
-curb_lengths = []
+curb_lengths = []   # indexed by curb_id in data
 for i in data:
     allowed_parking_length = 0
     # Find allowed parking spots only:
     for j in i:
-        if 'park' in j["rules"][0]["permitted"] and j["rules"][0]["vehicle_type"]=='all':
-            allowed_parking_length += j["metadata"]["distance_end_meters"] - j["metadata"]["distance_start_meters"]
+        if 'park' in j["properties"]["rules"][0]["permitted"] and j["properties"]["rules"][0]["vehicle_type"]=='all':
+            try:
+                allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"] - j["properties"]["metadata"]["distance_start_meters"]
+            except:
+                allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"]
     curb_lengths.append(allowed_parking_length)
+
+# Seems like average parallel parking length for a car is 20-23 feet.
+# Better to overestimate since people do not necessarily optimize
+# space usage.
+curb_car_capacity = []
+for i in curb_lengths:
+    curb_car_capacity.append(curb_lengths[i]/7) # divide by 7 meters (23 feet)
+
+# Assume people use parking from 7am to 7pm (total of 43200 seconds)
+curb_time_capacity = [] # in seconds
+                        # this is indexed by curb_id...
+for i in curb_car_capacity:
+    curb_time_capacity.append(i*43200)
+
+weight_by_meter = []
+for i in closest_curbs: # recall this is indexing essentially by meter_codes
+    if i is not None:
+        weight_by_meter.append(curb_time_capacity[i])
+    else:
+        weight_by_meter.append(None)
 
 """ for i in range(len(meter_indices_by_curb)):
     if meter_indices_by_curb[i]!=None:
