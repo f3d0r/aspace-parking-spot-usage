@@ -36,7 +36,27 @@ for i in range(len(data["features"])):
 counter.append(len(data["features"]))
 data = [data["features"][counter[i]:counter[i+1]] for i in range(len(counter)-1)]
 
+# Get curb lengths of allower parking
+curb_lengths = []   # indexed by curb_id in data
+for i in data:
+    allowed_parking_length = 0
+    # Find allowed parking spots only:
+    for j in i:
+        if 'park' in j["properties"]["rules"][0]["permitted"] and j["properties"]["rules"][0]["vehicle_type"]=='all':
+            try:
+                allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"] - j["properties"]["metadata"]["distance_start_meters"]
+            except:
+                allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"]
+    curb_lengths.append(allowed_parking_length)
+
+# List of no park curbs:
+unallowed_parking_curbs = [i for i in range(len(curb_lengths)) if curb_lengths[i]==0]
+print("Number of curbs with no allowed parking: ",len(unallowed_parking_curbs))
+data = [data[i] for i in range(len(data)) if i not in unallowed_parking_curbs]
 print("Number of distinct curbs found: ", len(data))
+
+# Remove these from curb_lengths now:
+curb_lengths = [i for i in curb_lengths if i!=0]
 
 PT = []
 with open('ParkingTransaction.csv', newline='') as f:
@@ -146,12 +166,13 @@ def manhattanDistance(curb_start, curb_end, meter_position):
 distances = [[] for i in meter_lng_lats]
 for i in range(len(meter_lng_lats)):
     for j in avg_curb_coords:
+    
         # L2 norm on lat/lng coordinates method
-        """ distances[i].append((float(meter_lng_lats[i][0])-j[0])*(float(meter_lng_lats[i][0])-j[0]) + 
-                            (float(meter_lng_lats[i][1])-j[1])*(float(meter_lng_lats[i][1])-j[1])) """
+        """ distances[i].append(sqrt((float(meter_lng_lats[i][0])-j[0])**2 + (float(meter_lng_lats[i][1])-j[1])**2)) """
+
         # "Crow distance" method
         distances[i].append(crowDistance(float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1]), j[0], j[1]))
-
+    #for j in data:
         # Manhattan distance method
         """ if j[-1]["geometry"]["coordinates"][0]==j[0]["geometry"]["coordinates"][0]:
             distances[i].append(manhattanDistance(
@@ -160,63 +181,57 @@ for i in range(len(meter_lng_lats)):
                 toXY([float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
             ))
             break IS THIS BREAK CORRECT???
+
         distances[i].append(manhattanDistance(
                             j[0]["geometry"]["coordinates"][0], j[-1]["geometry"]["coordinates"][0],
                             [float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
-                        ) """
+                        )"""
 
 # The following structure is indexed in order of the meter_codes,
 # and thus element i is the index of data with the closest curb_id 
 # to meter `meter_codes[i]`!
-closest_curbs = [i.index(min(i)) if min(i) < 40 else None for i in distances]
+closest_curbs = [i.index(min(i)) if min(i) < 5 else None for i in distances]
+
+# Are there curbs with many meters?
+print("Number of meters matched to a curb that already has a match: ", 
+       len([i for i in closest_curbs if i is not None]) - len(set([i for i in closest_curbs if i is not None])))
 
 # Get denominators for weights (total possible parking time by curb)
-curb_lengths = []   # indexed by curb_id in data
-for i in data:
-    allowed_parking_length = 0
-    # Find allowed parking spots only:
-    for j in i:
-        if 'park' in j["properties"]["rules"][0]["permitted"] and j["properties"]["rules"][0]["vehicle_type"]=='all':
-            try:
-                allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"] - j["properties"]["metadata"]["distance_start_meters"]
-            except:
-                allowed_parking_length += j["properties"]["metadata"]["distance_end_meters"]
-    curb_lengths.append(allowed_parking_length)
 
 # Seems like average parallel parking length for a car is 20-23 feet.
 # Better to overestimate since people do not necessarily optimize
 # space usage.
 curb_car_capacity = []
 for i in curb_lengths:
-    curb_car_capacity.append(curb_lengths[i]/7) # divide by 7 meters (23 feet)
+    curb_car_capacity.append(i/7) # divide by 7 meters (23 feet)
+
+print("Curb lengths: ", curb_lengths[0:20])
+print("Total parking durations: ", total_duration_by_meter[0:20])
 
 # Assume people use parking from 7am to 7pm (total of 43200 seconds)
 curb_time_capacity = [] # in seconds
                         # this is indexed by curb_id...
+days = 2
 for i in curb_car_capacity:
-    curb_time_capacity.append(i*43200)
+    curb_time_capacity.append(i*43200*days)
+
+print("Curb time capacities: ", curb_time_capacity[0:20])
 
 weight_by_meter = []
+cnt = 0
 for i in closest_curbs: # recall this is indexing essentially by meter_codes
     if i is not None:
-        weight_by_meter.append(curb_time_capacity[i])
+        weight_by_meter.append(total_duration_by_meter[cnt]/curb_time_capacity[i])
     else:
         weight_by_meter.append(None)
+    cnt += 1
 
-""" for i in range(len(meter_indices_by_curb)):
-    if meter_indices_by_curb[i]!=None:
-        print(min(distances[i]))
-        print(data[meter_indices_by_curb[i]][0])
-        print(meter_lng_lats[i])
-quit() """
-""" print(meter_indices_by_curb) """
-#print(distances)
+print("Number of weights assigned to a meter: ", sum(x is not None for x in weight_by_meter))
+print("Maximum weight: ", max([i for i in weight_by_meter if i is not None]))
+
 print("Number of parking meters matched to a curb: ", sum(x is not None for x in closest_curbs))
 print(len(meter_codes))
-""" print(len(meter_lng_lats))
-print(len(data))
-print(len(distances[0]))
-print(len(counter)) """
+
 containers = []
 """ for i in meter_indices_by_curb:
     if i is in containers: """
