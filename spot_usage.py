@@ -77,10 +77,12 @@ meter_codes = [str(code) for code in meter_codes]
 total_duration_by_meter = [0]*len(meter_codes)
 last_row_code = PT[0][1]
 start = 0
+# Bug might be in the following loop which adds all times for same code
 for row in PT:
     if row[1]!=last_row_code:
         start += 1
     last_row_code = row[1]
+    # I think error is in 
     for i in range(start,len(meter_codes)):
         if row[1]==meter_codes[i]:
             total_duration_by_meter[i] += int(row[7])
@@ -217,6 +219,9 @@ for i in curb_car_capacity:
 
 print("Curb time capacities: ", curb_time_capacity[0:20])
 
+print(max(total_duration_by_meter))
+quit()
+
 weight_by_meter = []
 cnt = 0
 for i in closest_curbs: # recall this is indexing essentially by meter_codes
@@ -231,15 +236,6 @@ print("Maximum weight: ", max([i for i in weight_by_meter if i is not None]))
 
 print("Number of parking meters matched to a curb: ", sum(x is not None for x in closest_curbs))
 print(len(meter_codes))
-
-containers = []
-""" for i in meter_indices_by_curb:
-    if i is in containers: """
-
-# Assume there is a 1:1 mapping between curbs and meter codes for now.
-# Compute weights:
-
-
 
 
 # Now we need to sum the parking durations of meters on the same curb 
