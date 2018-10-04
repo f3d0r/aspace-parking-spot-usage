@@ -2,6 +2,10 @@ import requests
 import json
 import csv
 
+import pickle
+import matplotlib.pyplot as plt
+
+import numpy as np
 from math import sin, cos, sqrt, atan2, radians, pi
 
 """ url = "https://api.coord.co/v1/search/curbs/bybounds/all_rules"
@@ -19,6 +23,7 @@ response = requests.request("GET", url, data = payload, params = querystring)
 data = json.loads(response.text)
 print(data)
 quit() """
+
 # Offloaded version.
 with open('***REMOVED***', 'r') as content_file:
     content = content_file.read()
@@ -36,7 +41,8 @@ for i in range(len(data["features"])):
 counter.append(len(data["features"]))
 data = [data["features"][counter[i]:counter[i+1]] for i in range(len(counter)-1)]
 
-# Get curb lengths of allower parking
+
+# Get curb lengths of allowed parking
 curb_lengths = []   # indexed by curb_id in data
 for i in data:
     allowed_parking_length = 0
@@ -51,12 +57,12 @@ for i in data:
 
 # List of no park curbs:
 unallowed_parking_curbs = [i for i in range(len(curb_lengths)) if curb_lengths[i]==0]
-print("Number of curbs with no allowed parking: ",len(unallowed_parking_curbs))
+print("Number of curbs with no allowed parking: ", len(unallowed_parking_curbs))
 data = [data[i] for i in range(len(data)) if i not in unallowed_parking_curbs]
 print("Number of distinct curbs found: ", len(data))
 
 # Remove these from curb_lengths now:
-curb_lengths = [i for i in curb_lengths if i!=0]
+curb_lengths = [i for i in curb_lengths if i != 0]
 
 PT = []
 with open('ParkingTransaction.csv', newline='') as f:
@@ -83,20 +89,6 @@ for row in PT:
     else:
         ind += 1
     last_row_code = row[1]
-
-total_duration_by_meter1 = [0]*len(meter_codes)
-# Bug might be in the following loop which adds all times for same code
-""" start = 0
-for row in PT:
-    if row[1]!=last_row_code:
-        start += 1
-    last_row_code = row[1]
-    # I think error is in 
-    for i in range(start,len(meter_codes)):
-        if row[1]==meter_codes[i]:
-            total_duration_by_meter1[i] += int(row[7])
-            break """
-#print([i/3600 for i in total_duration_by_meter])
 
 PS = []
 with open('Pay_Stations_Ordered.csv', newline='') as f:
@@ -154,10 +146,10 @@ def toXY(coords):
     lat = pi*coords[1]/180
     return [R*lng*cos(lat),R*lat]
 # testing: IT'S WAY OFF OF COORD'S MEASUREMENTS, CROWDISTANCE IS RIGHT ON THO
-""" c1 = toXY([-122.32596423473412, 47.61004406387254])
+c1 = toXY([-122.32596423473412, 47.61004406387254])
 c2 = toXY([-122.32610904893714, 47.6099834899322])
 print(sqrt((c1[0]-c2[0])**2 + (c1[1]-c2[1])**2))
-quit() """
+print(crowDistance(-122.32596423473412, 47.61004406387254, -122.32610904893714, 47.6099834899322))
 
 # POSSIBLE NEW IDEA: INSTEAD OF toXY, USE crowDistance TO CONVERT
 # TO A PLANAR GRID ON WHICH manhattanDistance IS COMPUTED
@@ -170,11 +162,11 @@ def manhattanDistance(curb_start, curb_end, meter_position):
     ) / sqrt(diff1**2 + diff2**2)
     return distance
 
-distances = [[] for i in meter_lng_lats]
+""" distances = [[] for i in meter_lng_lats]
 for i in range(len(meter_lng_lats)):
     for j in range(len(avg_curb_coords)):
         # L2 norm on lat/lng coordinates method
-        """ distances[i].append(sqrt((float(meter_lng_lats[i][0])-j[0])**2 + (float(meter_lng_lats[i][1])-j[1])**2)) """
+        # distances[i].append(sqrt((float(meter_lng_lats[i][0])-j[0])**2 + (float(meter_lng_lats[i][1])-j[1])**2))
 
         # "Crow distance" method
         as_the_crow_flies = crowDistance(float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1]), avg_curb_coords[j][0], avg_curb_coords[j][1])
@@ -197,23 +189,28 @@ for i in range(len(meter_lng_lats)):
         if as_the_crow_flies < 40 and manhattan_distance < 5:
             distances[i].append((as_the_crow_flies, manhattan_distance))
         else:
-            distances[i].append(None)
+            distances[i].append(None) """
 
+with open("distances_pickled", "rb") as f:
+            #pickle.dump(distances, f)
+            distances = pickle.load(f)
 
+print("length of distances: ", len(distances))
 # The following structure is indexed in order of the meter_codes,
 # and thus element i is the index of data with the closest curb_id 
 # to meter `meter_codes[i]`!
 closest_curbs = []
 for i in distances:
+    flag = True
     for j in i:
-        flag = False
         if j!=None:
             closest_curbs.append(i.index(j))
-            flag = True
+            flag = False
             break
-        if flag:
-            closest_curbs.append(None)
+    if flag:
+        closest_curbs.append(None)
 
+print("length of closest curbs", len(closest_curbs))
 # Are there curbs with many meters?
 print("Number of meters matched to a curb that already has a match: ", 
        len([i for i in closest_curbs if i is not None]) - len(set([i for i in closest_curbs if i is not None])))
@@ -227,16 +224,17 @@ curb_car_capacity = []
 for i in curb_lengths:
     curb_car_capacity.append(i/7) # divide by 7 meters (23 feet)
 
-print("Curb lengths: ", curb_lengths[0:20])
-print("Total parking durations: ", total_duration_by_meter[0:20])
+print("Curb lengths: ", curb_lengths[0:4])
+print("Total parking durations: ", total_duration_by_meter[0:4])
+
 # Assume people use parking from 7am to 7pm (total of 43200 seconds)
 curb_time_capacity = [] # in seconds
                         # this is indexed by curb_id...
-days = 2
+days = 1
 for i in curb_car_capacity:
     curb_time_capacity.append(i*43200*days)
 
-print("Curb time capacities: ", curb_time_capacity[0:8])
+print("Curb time capacities: ", curb_time_capacity[0:3])
 
 print("Maximum duration at a meter: ", max(total_duration_by_meter))
 
@@ -244,22 +242,37 @@ print("Maximum duration at a meter: ", max(total_duration_by_meter))
 weight_by_meter = []
 cnt = 0
 for i in closest_curbs: # recall this is indexing essentially by meter_codes
+    weight = total_duration_by_meter[cnt] / curb_time_capacity[i]
     if i is not None:
-        weight_by_meter.append(total_duration_by_meter[cnt]/curb_time_capacity[i])
+        weight_by_meter.append(weight)
     else:
         weight_by_meter.append(None)
     cnt += 1
 
-print("Number of weights assigned to meters: ", sum(x is not None for x in weight_by_meter))
-print("Maximum weight: ", max([i for i in weight_by_meter if i is not None]))
+print("Number of weights assigned to meters: ", sum(x is not None for x in weight_by_meter), cnt)
+sorted_weights = sorted([i for i in weight_by_meter if i is not None])
+#print("Maximum weights: ", sorted_weights)
+print("720th value: ", sorted_weights[720])
+
+weight_by_meter = [ x/sorted_weights[720] if x is not None else None for x in weight_by_meter ]
 
 print("Number of parking meters matched to a curb: ", sum(x is not None for x in closest_curbs))
 print(len(meter_codes))
 
+
+parking_info = [meter_codes, meter_lng_lats, weight_by_meter, closest_curbs]
+for i in parking_info:
+    print(len(i))
 
 # Now we need to sum the parking durations of meters on the same curb 
 # (assuming the parker is allowed to pay at either), and divide that by
 # the total time that cars COULD be parked at that curb (which we'll 
 # have to compute with an approximation for how much space a car takes
 # when parallel parked; additionally, we'll need to factor in the conditional
+# that the curb space CAN be parked at, and is not special-use). takes
+# when parallel parked; additionally, we'll need to factor in the conditional
 # that the curb space CAN be parked at, and is not special-use).
+
+plt.plot(list(range(len(sorted_weights))), sorted_weights)
+plt.plot(list(range(len(sorted_weights))), [1]*len(sorted_weights),'--')
+#plt.show()
