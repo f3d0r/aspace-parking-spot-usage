@@ -8,17 +8,17 @@ from math import sin, cos, sqrt, atan2, radians, pi
 
 # Make this a bounding box for whole city
 querystring = {
-    "min_latitude": "47.549981",
+    "min_latitude": "47.679981",
     "max_latitude": "47.678815",
     "min_longitude": "-122.395788",
-    "max_longitude": "-122.253946",
+    "max_longitude": "-122.393946",
     "access_key": "coord_api_key"
 }
 payload = ""
 response = requests.request("GET", url, data = payload, params = querystring)
 data = json.loads(response.text)
-print(data) """
-
+print(data)
+quit() """
 # Offloaded version.
 with open('***REMOVED***', 'r') as content_file:
     content = content_file.read()
@@ -65,19 +65,28 @@ with open('ParkingTransaction.csv', newline='') as f:
         PT.append(row)
 PT = PT[1:]
 meter_codes = []
-for row in PT[1:]:
+for row in PT:
     meter_codes.append(row[1])
-
-print("Number of meter codes obtained: ", len(meter_codes))
 
 meter_codes = list(set(meter_codes))
 meter_codes = [int(code) for code in meter_codes]
 meter_codes = sorted(meter_codes)
 meter_codes = [str(code) for code in meter_codes]
+print("Number of meter codes obtained: ", len(meter_codes))
+
 total_duration_by_meter = [0]*len(meter_codes)
 last_row_code = PT[0][1]
-start = 0
+ind = 0
+for row in PT:
+    if row[1]==last_row_code:
+        total_duration_by_meter[ind] += int(row[7])
+    else:
+        ind += 1
+    last_row_code = row[1]
+
+total_duration_by_meter1 = [0]*len(meter_codes)
 # Bug might be in the following loop which adds all times for same code
+""" start = 0
 for row in PT:
     if row[1]!=last_row_code:
         start += 1
@@ -85,8 +94,8 @@ for row in PT:
     # I think error is in 
     for i in range(start,len(meter_codes)):
         if row[1]==meter_codes[i]:
-            total_duration_by_meter[i] += int(row[7])
-            break
+            total_duration_by_meter1[i] += int(row[7])
+            break """
 #print([i/3600 for i in total_duration_by_meter])
 
 PS = []
@@ -116,10 +125,6 @@ print("Number of parking meters not matched to a coordinate: ", len(a))
 # Get midpoints of curbs from coord's curb rules.
 avg_curb_coords = []
 for i in data:
-    """ if i[0]["geometry"]["coordinates"][0][0]==i[-1]["geometry"]["coordinates"][0][0]:
-        avg_curb_coords.append([i[0]["geometry"]["coordinates"][0][0]/2 + i[0]["geometry"]["coordinates"][1][0]/2,
-                                i[0]["geometry"]["coordinates"][0][1]/2 + i[0]["geometry"]["coordinates"][1][1]/2])
-        break """
     avg_curb_coords.append([i[0]["geometry"]["coordinates"][0][0]/2 + i[-1]["geometry"]["coordinates"][0][0]/2,
                             i[0]["geometry"]["coordinates"][0][1]/2 + i[-1]["geometry"]["coordinates"][0][1]/2])
 
@@ -167,32 +172,47 @@ def manhattanDistance(curb_start, curb_end, meter_position):
 
 distances = [[] for i in meter_lng_lats]
 for i in range(len(meter_lng_lats)):
-    for j in avg_curb_coords:
-    
+    for j in range(len(avg_curb_coords)):
         # L2 norm on lat/lng coordinates method
         """ distances[i].append(sqrt((float(meter_lng_lats[i][0])-j[0])**2 + (float(meter_lng_lats[i][1])-j[1])**2)) """
 
         # "Crow distance" method
-        distances[i].append(crowDistance(float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1]), j[0], j[1]))
-    #for j in data:
-        # Manhattan distance method
-        """ if j[-1]["geometry"]["coordinates"][0]==j[0]["geometry"]["coordinates"][0]:
-            distances[i].append(manhattanDistance(
-                toXY(j[0]["geometry"]["coordinates"][0]), 
-                toXY(j[0]["geometry"]["coordinates"][1]),
-                toXY([float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
-            ))
-            break IS THIS BREAK CORRECT???
+        as_the_crow_flies = crowDistance(float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1]), avg_curb_coords[j][0], avg_curb_coords[j][1])
 
-        distances[i].append(manhattanDistance(
-                            j[0]["geometry"]["coordinates"][0], j[-1]["geometry"]["coordinates"][0],
-                            [float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
-                        )"""
+        # Manhattan distance method
+        if data[j][-1]["geometry"]["coordinates"][0]==data[j][0]["geometry"]["coordinates"][0]:
+            manhattan_distance = manhattanDistance(
+                    toXY(data[j][0]["geometry"]["coordinates"][0]), 
+                    toXY(data[j][0]["geometry"]["coordinates"][1]),
+                    toXY([float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
+                )
+        else:
+            manhattan_distance = manhattanDistance(
+                    toXY(data[j][0]["geometry"]["coordinates"][0]), 
+                    toXY(data[j][-1]["geometry"]["coordinates"][1]),
+                    toXY([float(meter_lng_lats[i][0]), float(meter_lng_lats[i][1])])
+                )
+  
+        # Only accept if meter is near curb:
+        if as_the_crow_flies < 40 and manhattan_distance < 5:
+            distances[i].append((as_the_crow_flies, manhattan_distance))
+        else:
+            distances[i].append(None)
+
 
 # The following structure is indexed in order of the meter_codes,
 # and thus element i is the index of data with the closest curb_id 
 # to meter `meter_codes[i]`!
-closest_curbs = [i.index(min(i)) if min(i) < 5 else None for i in distances]
+closest_curbs = []
+for i in distances:
+    for j in i:
+        flag = False
+        if j!=None:
+            closest_curbs.append(i.index(j))
+            flag = True
+            break
+        if flag:
+            closest_curbs.append(None)
 
 # Are there curbs with many meters?
 print("Number of meters matched to a curb that already has a match: ", 
@@ -209,7 +229,6 @@ for i in curb_lengths:
 
 print("Curb lengths: ", curb_lengths[0:20])
 print("Total parking durations: ", total_duration_by_meter[0:20])
-
 # Assume people use parking from 7am to 7pm (total of 43200 seconds)
 curb_time_capacity = [] # in seconds
                         # this is indexed by curb_id...
@@ -217,10 +236,10 @@ days = 2
 for i in curb_car_capacity:
     curb_time_capacity.append(i*43200*days)
 
-print("Curb time capacities: ", curb_time_capacity[0:20])
+print("Curb time capacities: ", curb_time_capacity[0:8])
 
-print(max(total_duration_by_meter))
-quit()
+print("Maximum duration at a meter: ", max(total_duration_by_meter))
+
 
 weight_by_meter = []
 cnt = 0
@@ -231,7 +250,7 @@ for i in closest_curbs: # recall this is indexing essentially by meter_codes
         weight_by_meter.append(None)
     cnt += 1
 
-print("Number of weights assigned to a meter: ", sum(x is not None for x in weight_by_meter))
+print("Number of weights assigned to meters: ", sum(x is not None for x in weight_by_meter))
 print("Maximum weight: ", max([i for i in weight_by_meter if i is not None]))
 
 print("Number of parking meters matched to a curb: ", sum(x is not None for x in closest_curbs))
