@@ -199,21 +199,21 @@ print("length of distances: ", len(distances))
 # The following structure is indexed in order of the meter_codes,
 # and thus element i is the index of data with the closest curb_id 
 # to meter `meter_codes[i]`!
-closest_curbs = []
+closest_curb_indices = []
 for i in distances:
     flag = True
     for j in i:
         if j!=None:
-            closest_curbs.append(i.index(j))
+            closest_curb_indices.append(i.index(j))
             flag = False
             break
     if flag:
-        closest_curbs.append(None)
+        closest_curb_indices.append(None)
 
-print("length of closest curbs", len(closest_curbs))
+print("length of closest curbs", len(closest_curb_indices))
 # Are there curbs with many meters?
 print("Number of meters matched to a curb that already has a match: ", 
-       len([i for i in closest_curbs if i is not None]) - len(set([i for i in closest_curbs if i is not None])))
+       len([i for i in closest_curb_indices if i is not None]) - len(set([i for i in closest_curb_indices if i is not None])))
 
 # Get denominators for weights (total possible parking time by curb)
 
@@ -238,12 +238,11 @@ print("Curb time capacities: ", curb_time_capacity[0:3])
 
 print("Maximum duration at a meter: ", max(total_duration_by_meter))
 
-
 weight_by_meter = []
 cnt = 0
-for i in closest_curbs: # recall this is indexing essentially by meter_codes
-    weight = total_duration_by_meter[cnt] / curb_time_capacity[i]
+for i in closest_curb_indices: # recall this is indexing essentially by meter_codes
     if i is not None:
+        weight = total_duration_by_meter[cnt] / curb_time_capacity[i]
         weight_by_meter.append(weight)
     else:
         weight_by_meter.append(None)
@@ -256,20 +255,20 @@ print("720th value: ", sorted_weights[720])
 
 weight_by_meter = [ x/sorted_weights[720] if x is not None else None for x in weight_by_meter ]
 
-print("Number of parking meters matched to a curb: ", sum(x is not None for x in closest_curbs))
+print("Number of parking meters matched to a curb: ", sum(x is not None for x in closest_curb_indices))
 print(len(meter_codes))
 
-
+closest_curbs = [data[i] if i is not None else None for i in closest_curb_indices]
 parking_info = [meter_codes, meter_lng_lats, weight_by_meter, closest_curbs]
 for i in parking_info:
     print(len(i))
+
+### Basically need to parse coord data into parking data, then we'll be done integrating these weights
 
 # Now we need to sum the parking durations of meters on the same curb 
 # (assuming the parker is allowed to pay at either), and divide that by
 # the total time that cars COULD be parked at that curb (which we'll 
 # have to compute with an approximation for how much space a car takes
-# when parallel parked; additionally, we'll need to factor in the conditional
-# that the curb space CAN be parked at, and is not special-use). takes
 # when parallel parked; additionally, we'll need to factor in the conditional
 # that the curb space CAN be parked at, and is not special-use).
 
